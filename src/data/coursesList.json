@@ -1,0 +1,24 @@
+{
+  "Courses": {
+    "data": [
+      {
+        "id": "5da9ea674234635bdff45c02",
+        "name": "Como Roubar Doces",
+        "instructors": "João e Maria",
+        "urlDoc": "drive.com",
+        "extra": "aprenda a se livrar das cáries",
+        "goals": "Aprender a roubar doces e fugir de uma bruxa louca",
+        "topicsCovered": "Escolhendo os melhores doces, "
+      },
+      {
+        "id": "5da9ea674234635bdff45c02",
+        "name": "Como Roubar Doces",
+        "instructors": "João e Maria",
+        "urlDoc": "drive.com",
+        "extra": "aprenda a se livrar das cáries",
+        "goals": "Aprender a roubar doces e fugir de uma bruxa louca",
+        "topicsCovered": "Escolhendo os melhores doces, "
+      }
+    ]
+  }
+}
