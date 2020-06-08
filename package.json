@@ -6,19 +6,23 @@
   "scripts": {
     "build": "tsc",
     "start:dev": "nodemon",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "test": "jest"
   },
   "dependencies": {
     "@types/cors": "^2.8.6",
+    "@types/jest": "^25.2.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "eslint": "^7.0.0",
     "express": "^4.17.1",
+    "jest": "^26.0.1",
     "mongoose": "^5.9.15",
     "query-string": "^6.12.1",
     "ts-node": "^8.10.1"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.10.1",
     "@types/express": "^4.17.6",
     "@types/mongoose": "^5.7.21",
     "@types/node": "^14.0.4",
