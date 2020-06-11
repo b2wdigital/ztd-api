@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
 
-export default (mongoDbUrl: string) => {
+export default (mongoDbUrl: string): void => {
   mongoose.connect(mongoDbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   });
 
   mongoose.connection.once("connected", () => {
     console.log("Conectado com MongoDB.");
   });
 
-  mongoose.connection.on("error", err => {
+  mongoose.connection.on("error", (err) => {
     console.error(`💥 Deu erro, ${err}`);
   });
 };

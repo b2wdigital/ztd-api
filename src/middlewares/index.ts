@@ -7,7 +7,7 @@ import authRoutes from "../routes/authenticate";
 
 const initLibs = (app: Express) => {
   app.use(express.json());
-  app.use(cors({origin: true, credentials: true}));
+  app.use(cors({ origin: true, credentials: true }));
 };
 
 const initRoutes = (app: Express) => {
@@ -15,10 +15,9 @@ const initRoutes = (app: Express) => {
   app.use("/feedbacks", feedbackRoutes);
   app.use("/users", userRoutes);
   app.use("/authenticate", authRoutes);
-
 };
 
-export default (app: Express) => {
+export default (app: Express): void => {
   initLibs(app);
   initRoutes(app);
 };

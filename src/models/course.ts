@@ -1,4 +1,13 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Document } from "mongoose";
+
+export interface ICourseDocument extends Document {
+  name: string;
+  instructors: string;
+  urlDoc: string;
+  extra: string;
+  goals: string;
+  topicsCovered: string;
+}
 
 const courseSchema = new Schema(
   {
@@ -7,16 +16,13 @@ const courseSchema = new Schema(
     urlDoc: { type: Array, default: [] },
     extra: { type: String, default: "" },
     goals: { type: String, default: "" },
-    topicsCovered: { type: String, default: "" }
+    topicsCovered: { type: String, default: "" },
   },
   {
-    versionKey: false
+    versionKey: false,
   }
 );
 
-const courseModel = model("Course", courseSchema);
+const courseModel = model<ICourseDocument>("Course", courseSchema);
 
 export default courseModel;
-
-// docker run --net=host -it mongo mongo 127.0.0.1:27017
-// docker run --net=host mongo:4.2.6-bionic

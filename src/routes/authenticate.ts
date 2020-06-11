@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { redirectGit } from "../controllers/authenticate"
+// import { redirectGit } from "../controllers/authenticate";
 
 const router = Router();
 
-router.get("/github", redirectGit);
-
+// router.get("/github", redirectGit);
 
 export default router;

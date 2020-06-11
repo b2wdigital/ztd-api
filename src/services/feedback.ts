@@ -1,9 +1,10 @@
-import feedbackModel from "../models/feedback";
+import feedbackModel, { IFeedbackDocument } from "../models/feedback";
 import { Feedback } from "../types/feedback";
+
 const NotFoundError = require("../errors/not-found-error");
 const ValidationError = require("../errors/validation-error");
 
-export const create = async (data: Feedback) => {
+export const create = async (data: Feedback): Promise<IFeedbackDocument> => {
   const {
     id_user,
     id_course,
@@ -12,46 +13,67 @@ export const create = async (data: Feedback) => {
     negativeFeedback,
   } = data;
 
-  const feedback = await feedbackModel.find({"id_course": id_course, "id_user": id_user})
-  console.log('O valor do feedback é', feedback)
+  const feedback = await feedbackModel.find({
+    id_course,
+    id_user,
+  });
+  console.log("O valor do feedback é", feedback);
 
   if (!feedback) {
-    throw new ValidationError({ message: 'Feedback already exists', statusCode: 409 })
+    throw new ValidationError({
+      message: "Feedback already exists",
+      statusCode: 409,
+    });
   }
 
-  if (!id_user || id_user === '') {
+  if (!id_user || id_user === "") {
     /** adicionar classe de erro com status code */
-    throw new ValidationError({ message: 'Field id_user is required', statusCode: 422 })
+    throw new ValidationError({
+      message: "Field id_user is required",
+      statusCode: 422,
+    });
   }
 
-  if (!id_course || id_course === '') {
+  if (!id_course || id_course === "") {
     /** adicionar classe de erro com status code */
-    throw new ValidationError({ message: 'Field id_course is required', statusCode: 422 })
+    throw new ValidationError({
+      message: "Field id_course is required",
+      statusCode: 422,
+    });
   }
 
   if (!grade) {
     /** adicionar classe de erro com status code */
-    throw new ValidationError({ message: 'Field grade is required', statusCode: 422 })
+    throw new ValidationError({
+      message: "Field grade is required",
+      statusCode: 422,
+    });
   }
 
-  if (!positiveFeedback || positiveFeedback === '') {
+  if (!positiveFeedback || positiveFeedback === "") {
     /** adicionar classe de erro com status code */
-    throw new ValidationError({ message: 'Field positiveFeedback is required', statusCode: 422 })
+    throw new ValidationError({
+      message: "Field positiveFeedback is required",
+      statusCode: 422,
+    });
   }
 
-  if (!negativeFeedback || negativeFeedback === '') {
+  if (!negativeFeedback || negativeFeedback === "") {
     /** adicionar classe de erro com status code */
-    throw new ValidationError({ message: 'Field negativeFeedback is required', statusCode: 422 })
+    throw new ValidationError({
+      message: "Field negativeFeedback is required",
+      statusCode: 422,
+    });
   }
-  return await feedbackModel.create(data);
+  return feedbackModel.create(data);
 };
 
-export const List = async () => {
+export const List = async (): Promise<IFeedbackDocument[]> => {
   const feedback = await feedbackModel.find();
   return feedback;
 };
 
-export const getById = async (id: String) => {
+export const getById = async (id: string): Promise<IFeedbackDocument> => {
   const feedback = await feedbackModel.findById(id);
   if (!feedback) {
     throw new NotFoundError({
@@ -62,8 +84,8 @@ export const getById = async (id: String) => {
   return feedback;
 };
 
-export const getByUser = async (id: String) => {
-  const feedback = await feedbackModel.find({"id_user": id});
+export const getByUser = async (id: string): Promise<IFeedbackDocument[]> => {
+  const feedback = await feedbackModel.find({ id_user: id });
 
   if (!feedback) {
     throw new NotFoundError({
@@ -74,11 +96,11 @@ export const getByUser = async (id: String) => {
   return feedback;
 };
 
-export const getByCourse = async (id: String) => {
-  const feedback = await feedbackModel.find({"id_course": id});
+export const getByCourse = async (id: string): Promise<IFeedbackDocument[]> => {
+  const feedback = await feedbackModel.find({ id_course: id });
   if (!feedback) {
     throw new NotFoundError({
-      message: `🤷 None Course Feedback ${id} found`,
+      message: `🤷 Any Course Feedback ${id} found`,
       statusCode: 404,
     });
   }

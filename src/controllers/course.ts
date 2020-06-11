@@ -1,53 +1,65 @@
-import * as courseService  from "../services/course";
 import { Request, Response } from "express";
+import * as courseService from "../services/course";
 
-export const createCourse = async (req: Request, res: Response) => {
+export const createCourse = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
     const dbResponse = await courseService.create(req.body);
-    res.status(200).send(dbResponse);
+    return res.status(200).send(dbResponse);
   } catch (err) {
     return res.status(err.statusCode || 500).json({
       error: `👻 ${err.name}`,
-      message: `${err.message}`
-    })
+      message: `${err.message}`,
+    });
   }
 };
 
-export const getCourseById = async (req: Request, res: Response) => {
+export const getCourseById = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   try {
     const { id } = req.params;
     const dbResponse = await courseService.getById(id);
-    res.status(200).send(dbResponse);
+    return res.status(200).send(dbResponse);
   } catch (err) {
     return res.status(err.statusCode || 500).json({
       error: `👻 ${err.name}`,
-      message: `${err.message}`
-    })
+      message: `${err.message}`,
+    });
   }
 };
 
-export const getAllCourses = async (req: Request, res: Response) => {
+export const getAllCourses = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   const dbResponse = await courseService.list();
   try {
-    res.send(dbResponse);
+    return res.send(dbResponse);
   } catch (err) {
     return res.status(err.statusCode || 500).json({
       error: `👻 ${err.name}`,
-      message: `${err.message}`
-    })
+      message: `${err.message}`,
+    });
   }
 };
 
-export const updateCourse = async (req: Request, res: Response) => {
+export const updateCourse = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   const { body, params } = req;
   const dbResponse = await courseService.update(params.id, body);
   try {
-    res.send(dbResponse);
+    return res.send(dbResponse);
   } catch (err) {
     return res.status(err.statusCode || 500).json({
       error: `👻 ${err.name}`,
-      message: `${err.message}`
-    })
+      message: `${err.message}`,
+    });
   }
 };
 
@@ -85,7 +97,3 @@ export const updateCourse = async (req: Request, res: Response) => {
 //     res.status(500).send(error);
 //   }
 // };
-
-
-
-

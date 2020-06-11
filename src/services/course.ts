@@ -1,43 +1,50 @@
-import courseModel from "../models/course";
-import { Course }  from "../types/course";
-const NotFoundError = require('../errors/not-found-error')
-const ValidationError = require('../errors/validation-error')
+import courseModel, { ICourseDocument } from "../models/course";
+import { Course } from "../types/course";
 
-export const create = async (data: Course) => {
-    const { name, instructors, urlDoc, extra, goals, topicsCovered } = data;
+const NotFoundError = require("../errors/not-found-error");
+const ValidationError = require("../errors/validation-error");
 
-    if (!data.name|| name === ''){
-      throw new ValidationError({ message: 'Field name is required', statusCode: 422 })
-    }
-    return await courseModel.create(data)
+export const create = async (data: Course): Promise<ICourseDocument> => {
+  const { name } = data;
+
+  if (!data.name || name === "") {
+    throw new ValidationError({
+      message: "Field name is required",
+      statusCode: 422,
+    });
+  }
+  return courseModel.create(data);
 };
 
-export const getById = async (id: string) => {
-    const course = await courseModel.findById(id);
-    if (!course) {
-      throw new NotFoundError({
-        message: `🤷 Feedback ${id} not found`,
-        statusCode: 404,
-      });
-    }
-    return course;
-};
-
-export const list = async () => {
-  const course = await courseModel.find()
+export const getById = async (id: string): Promise<ICourseDocument> => {
+  const course = await courseModel.findById(id);
+  if (!course) {
+    throw new NotFoundError({
+      message: `🤷 Feedback ${id} not found`,
+      statusCode: 404,
+    });
+  }
   return course;
 };
 
-export const update = async (id: string, body: Course) => {
+export const list = async (): Promise<ICourseDocument[]> => {
+  const course = await courseModel.find();
+  return course;
+};
+
+export const update = async (
+  id: string,
+  body: Course
+): Promise<ICourseDocument> => {
   await courseModel.findByIdAndUpdate(id, body);
-  const course =  await courseModel.findById(id)
+  const course = await courseModel.findById(id);
   if (!course) {
     throw new NotFoundError({
       message: `🤷 Course ${id} not found`,
       statusCode: 404,
     });
   }
-  return course
+  return course;
 };
 
 // export const updateInstructor = async (req: Request, res: Response) => {
@@ -74,7 +81,3 @@ export const update = async (id: string, body: Course) => {
 //     res.status(500).send(error);
 //   }
 // };
-
-
-
-

@@ -1,2 +1,3 @@
-test('teste no jest', ()=> {
-})
+test("teste no jest", () => {
+  return true;
+});
