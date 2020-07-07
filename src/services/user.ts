@@ -6,7 +6,6 @@ const ValidationError = require("../errors/validation-error");
 
 export const create = async (data: User): Promise<IUserDocument> => {
   const { name, email, canEditCourse, canFeedback } = data;
-
   if (!name || name === "") {
     throw new ValidationError({
       message: "Field name is required",

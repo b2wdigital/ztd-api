@@ -1,13 +1,11 @@
 import { Schema, model, Document } from "mongoose";
-import { ICourseDocument } from "./course";
 
 export interface IFeedbackDocument extends Document {
-  name: string;
-  instructors: string;
-  urlDoc: string;
-  extra: string;
-  goals: string;
-  topicsCovered: string;
+  id_user: string;
+  id_course: string;
+  grade: number;
+  positiveFeedback: string;
+  negativeFeedback: string;
 }
 
 const feedbackSchema = new Schema(
@@ -23,6 +21,6 @@ const feedbackSchema = new Schema(
   }
 );
 
-const feedbackModel = model<ICourseDocument>("Feedback", feedbackSchema);
+const feedbackModel = model<IFeedbackDocument>("Feedback", feedbackSchema);
 
 export default feedbackModel;
