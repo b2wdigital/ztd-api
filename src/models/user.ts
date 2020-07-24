@@ -1,9 +1,9 @@
 import { Schema, model, Document } from "mongoose";
 
 export interface IUserDocument extends Document {
+  googleid: string;
   name: string;
-  profile_url: string;
-  title: string;
+  profileUrl: string;
   email: string;
   canFeedback: boolean;
   canEditCourse: boolean;
@@ -11,9 +11,9 @@ export interface IUserDocument extends Document {
 
 const userSchema = new Schema(
   {
+    googleid: { type: String, required: true },
     name: { type: String, required: true },
-    profile_url: { type: String, default: "" },
-    title: { type: String, default: "" },
+    profileUrl: { type: String, default: "" },
     email: { type: String, default: "", required: true },
     canFeedback: { type: Boolean, required: true },
     canEditCourse: { type: Boolean, required: false },

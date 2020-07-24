@@ -9,7 +9,7 @@ require("dotenv").config();
 const app = express();
 
 dbConnect(config.MONGO_DB_URL);
-setMiddlewares(app);
+export const mid = setMiddlewares(app);
 
 app.listen(config.PORT, () => {
   console.log(`✨ server started on port ${config.PORT}!`);

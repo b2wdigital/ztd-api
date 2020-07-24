@@ -14,7 +14,7 @@ const initRoutes = (app: Express) => {
   app.use("/courses", courseRoutes);
   app.use("/feedbacks", feedbackRoutes);
   app.use("/users", userRoutes);
-  app.use("/authenticate", authRoutes);
+  app.use("/auth", authRoutes);
 };
 
 export default (app: Express): void => {

@@ -41,20 +41,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.update = exports.list = exports.getById = exports.create = void 0;
 var course_1 = __importDefault(require("../models/course"));
-var NotFoundError = require('../errors/not-found-error');
-var ValidationError = require('../errors/validation-error');
+var NotFoundError = require("../errors/not-found-error");
+var ValidationError = require("../errors/validation-error");
 exports.create = function (data) { return __awaiter(void 0, void 0, void 0, function () {
-    var name, instructors, urlDoc, extra, goals, topicsCovered;
+    var name;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                name = data.name, instructors = data.instructors, urlDoc = data.urlDoc, extra = data.extra, goals = data.goals, topicsCovered = data.topicsCovered;
-                if (!data.name || name === '') {
-                    throw new ValidationError({ message: 'Field name is required', statusCode: 422 });
-                }
-                return [4 /*yield*/, course_1.default.create(data)];
-            case 1: return [2 /*return*/, _a.sent()];
+        name = data.name;
+        if (!data.name || name === "") {
+            throw new ValidationError({
+                message: "Field name is required",
+                statusCode: 422,
+            });
         }
+        return [2 /*return*/, course_1.default.create(data)];
     });
 }); };
 exports.getById = function (id) { return __awaiter(void 0, void 0, void 0, function () {

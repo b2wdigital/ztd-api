@@ -9,12 +9,12 @@ exports.default = (function (mongoDbUrl) {
         useNewUrlParser: true,
         useCreateIndex: true,
         useFindAndModify: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
     });
     mongoose_1.default.connection.once("connected", function () {
         console.log("Conectado com MongoDB.");
     });
     mongoose_1.default.connection.on("error", function (err) {
-        console.error("\uD83D\uDCA5 Deu erro " + err);
+        console.error("\uD83D\uDCA5 Deu erro, " + err);
     });
 });

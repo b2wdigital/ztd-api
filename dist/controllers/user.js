@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -54,53 +54,50 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPendingFeedbacks = exports.getGivenFeedbacks = exports.getAllInstructors = exports.getAllUsers = exports.getByUserId = exports.createUser = void 0;
-var user_1 = __importDefault(require("../models/user"));
+exports.getPendingFeedbacks = exports.getGivenFeedbacks = exports.getAllUsers = exports.getByUserId = exports.createUser = void 0;
+var userService = __importStar(require("../services/user"));
 var relationsService = __importStar(require("../services/relations"));
 exports.createUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name_1, profile_url, title, email, canFeedback, canEditCourse, dbReq, dbResponse, error_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+    var data, dbResponse, err_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
-                _b.trys.push([0, 2, , 3]);
-                _a = req.body, name_1 = _a.name, profile_url = _a.profile_url, title = _a.title, email = _a.email, canFeedback = _a.canFeedback, canEditCourse = _a.canEditCourse;
-                dbReq = { name: name_1, profile_url: profile_url, title: title, email: email, canFeedback: canFeedback, canEditCourse: canEditCourse };
-                return [4 /*yield*/, user_1.default.create(dbReq)];
+                _a.trys.push([0, 2, , 3]);
+                data = req.body;
+                return [4 /*yield*/, userService.create(data)];
             case 1:
-                dbResponse = _b.sent();
-                res.status(200).send(dbResponse);
-                return [3 /*break*/, 3];
+                dbResponse = _a.sent();
+                return [2 /*return*/, res.send(dbResponse)];
             case 2:
-                error_1 = _b.sent();
-                res.status(500).send(error_1);
-                return [3 /*break*/, 3];
+                err_1 = _a.sent();
+                return [2 /*return*/, res.status(err_1.statusCode).json({
+                        error: "\uD83D\uDC7B " + err_1.name,
+                        message: "" + err_1.message,
+                    })];
             case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.getByUserId = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, dbResponse, error_2;
+    var id, dbResponse;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 id = req.params.id;
-                _a.label = 1;
+                return [4 /*yield*/, userService.getById(id)];
             case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, user_1.default.findById(id)];
-            case 2:
                 dbResponse = _a.sent();
-                res.status(200).send(dbResponse);
-                return [3 /*break*/, 4];
-            case 3:
-                error_2 = _a.sent();
-                res.status(500).send(error_2);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                try {
+                    return [2 /*return*/, res.send(dbResponse)];
+                }
+                catch (err) {
+                    return [2 /*return*/, res.status(err.statusCode || 500).json({
+                            error: "\uD83D\uDC7B " + err.name,
+                            message: "" + err.message,
+                        })];
+                }
+                return [2 /*return*/];
         }
     });
 }); };
@@ -108,42 +105,32 @@ exports.getAllUsers = function (req, res) { return __awaiter(void 0, void 0, voi
     var dbResponse;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, user_1.default.find()];
+            case 0: return [4 /*yield*/, userService.list()];
             case 1:
                 dbResponse = _a.sent();
                 try {
-                    res.send(dbResponse);
+                    return [2 /*return*/, res.send(dbResponse)];
                 }
-                catch (error) {
-                    res.status(500).send(error);
+                catch (err) {
+                    return [2 /*return*/, res.status(err.statusCode || 500).json({
+                            error: "\uD83D\uDC7B " + err.name,
+                            message: "" + err.message,
+                        })];
                 }
                 return [2 /*return*/];
         }
     });
 }); };
-exports.getAllInstructors = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, dbResponse, error_3;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                id = req.params.id;
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, user_1.default.findById(id)];
-            case 2:
-                dbResponse = _a.sent();
-                console.log(dbResponse);
-                res.status(200).send(dbResponse);
-                return [3 /*break*/, 4];
-            case 3:
-                error_3 = _a.sent();
-                res.status(500).send(error_3);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
+// export const getAllInstructors = async (req: Request, res: Response) => {
+//   const { id } = req.params;
+//   try {
+//     const dbResponse = await userModel.findById(id);
+//     console.log(dbResponse);
+//     res.status(200).send(dbResponse);
+//   } catch (error) {
+//     res.status(500).send(error);
+//   }
+// };
 exports.getGivenFeedbacks = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var id, dbResponse;
     return __generator(this, function (_a) {
@@ -154,12 +141,12 @@ exports.getGivenFeedbacks = function (req, res) { return __awaiter(void 0, void 
             case 1:
                 dbResponse = _a.sent();
                 try {
-                    res.send(dbResponse);
+                    return [2 /*return*/, res.send(dbResponse)];
                 }
                 catch (err) {
                     return [2 /*return*/, res.status(err.statusCode || 500).json({
                             error: "\uD83D\uDC7B " + err.name,
-                            message: "" + err.message
+                            message: "" + err.message,
                         })];
                 }
                 return [2 /*return*/];
@@ -176,12 +163,12 @@ exports.getPendingFeedbacks = function (req, res) { return __awaiter(void 0, voi
             case 1:
                 dbResponse = _a.sent();
                 try {
-                    res.send(dbResponse);
+                    return [2 /*return*/, res.send(dbResponse)];
                 }
                 catch (err) {
                     return [2 /*return*/, res.status(err.statusCode || 500).json({
                             error: "\uD83D\uDC7B " + err.name,
-                            message: "" + err.message
+                            message: "" + err.message,
                         })];
                 }
                 return [2 /*return*/];

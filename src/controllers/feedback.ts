@@ -53,6 +53,8 @@ export const getFeedbackByUser = async (
   res: Response
 ): Promise<Response> => {
   const { id } = req.params;
+  // const { jwt } = req.headers.authorization;
+
   const dbResponse = await feedbackService.getByUser(id);
   try {
     return res.send(dbResponse);
