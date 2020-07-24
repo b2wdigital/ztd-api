@@ -19,6 +19,7 @@
     "express": "^4.17.1",
     "global": "^4.4.0",
     "googleapis": "^54.0.0",
+    "jest": "^26.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.15",
     "query-string": "^6.13.1"

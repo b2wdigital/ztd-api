@@ -16,6 +16,7 @@ describe("Users", () => {
     it("Should add a new user to database", async () => {
       const newUser = new User({
         name: "Student_XX",
+        googleid: "aaaaa",
         title: "student",
         email: "student.3@b2wdigital.com.br",
         canFeedback: true,
@@ -28,6 +29,7 @@ describe("Users", () => {
       const users = [
         {
           name: "Student_01",
+          googleid: "aaaaa",
           title: "student",
           email: "student.1@b2wdigital.com.br",
           canFeedback: true,
@@ -35,6 +37,7 @@ describe("Users", () => {
         },
         {
           name: "Student_02",
+          googleid: "aaaaa",
           title: "student",
           email: "student.2@b2wdigital.com.br",
           canFeedback: true,
@@ -62,12 +65,14 @@ describe("Users", () => {
         {
           name: "Student_1",
           title: "student",
+          googleid: "aaaaa",
           email: "student.1@b2wdigital.com.br",
           canFeedback: true,
           canEditCourse: false,
         },
         {
           name: "Student_2",
+          googleid: "aaaaa",
           title: "student",
           email: "student.2@b2wdigital.com.br",
           canFeedback: true,
@@ -75,6 +80,7 @@ describe("Users", () => {
         },
         {
           name: "Student_3",
+          googleid: "aaaaa",
           title: "student",
           email: "student.3@b2wdigital.com.br",
           canFeedback: true,
@@ -98,6 +104,7 @@ describe("Users", () => {
     it("Should return a list of user successfully", async () => {
       const user = {
         name: "Student_1",
+        googleid: "aaaaa",
         title: "student",
         email: "student.1@b2wdigital.com.br",
         canFeedback: true,
