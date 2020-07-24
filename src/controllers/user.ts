@@ -2,22 +2,6 @@ import { Request, Response } from "express";
 import * as userService from "../services/user";
 import * as relationsService from "../services/relations";
 
-export const createUser = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
-  try {
-    const data = req.body;
-    const dbResponse = await userService.create(data);
-    return res.send(dbResponse);
-  } catch (err) {
-    return res.status(err.statusCode).json({
-      error: `👻 ${err.name}`,
-      message: `${err.message}`,
-    });
-  }
-};
-
 export const getByUserId = async (
   req: Request,
   res: Response

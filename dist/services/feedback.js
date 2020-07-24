@@ -49,35 +49,55 @@ exports.create = function (data) { return __awaiter(void 0, void 0, void 0, func
         switch (_a.label) {
             case 0:
                 id_user = data.id_user, id_course = data.id_course, grade = data.grade, positiveFeedback = data.positiveFeedback, negativeFeedback = data.negativeFeedback;
-                return [4 /*yield*/, feedback_1.default.find({ "id_course": id_course, "id_user": id_user })];
+                return [4 /*yield*/, feedback_1.default.find({
+                        id_course: id_course,
+                        id_user: id_user,
+                    })];
             case 1:
                 feedback = _a.sent();
-                console.log('O valor do feedback é', feedback);
+                console.log("O valor do feedback é", feedback);
                 if (!feedback) {
-                    throw new ValidationError({ message: 'Feedback already exists', statusCode: 409 });
+                    throw new ValidationError({
+                        message: "Feedback already exists",
+                        statusCode: 409,
+                    });
                 }
-                if (!id_user || id_user === '') {
+                if (!id_user || id_user === "") {
                     /** adicionar classe de erro com status code */
-                    throw new ValidationError({ message: 'Field id_user is required', statusCode: 422 });
+                    throw new ValidationError({
+                        message: "Field id_user is required",
+                        statusCode: 422,
+                    });
                 }
-                if (!id_course || id_course === '') {
+                if (!id_course || id_course === "") {
                     /** adicionar classe de erro com status code */
-                    throw new ValidationError({ message: 'Field id_course is required', statusCode: 422 });
+                    throw new ValidationError({
+                        message: "Field id_course is required",
+                        statusCode: 422,
+                    });
                 }
                 if (!grade) {
                     /** adicionar classe de erro com status code */
-                    throw new ValidationError({ message: 'Field grade is required', statusCode: 422 });
+                    throw new ValidationError({
+                        message: "Field grade is required",
+                        statusCode: 422,
+                    });
                 }
-                if (!positiveFeedback || positiveFeedback === '') {
+                if (!positiveFeedback || positiveFeedback === "") {
                     /** adicionar classe de erro com status code */
-                    throw new ValidationError({ message: 'Field positiveFeedback is required', statusCode: 422 });
+                    throw new ValidationError({
+                        message: "Field positiveFeedback is required",
+                        statusCode: 422,
+                    });
                 }
-                if (!negativeFeedback || negativeFeedback === '') {
+                if (!negativeFeedback || negativeFeedback === "") {
                     /** adicionar classe de erro com status code */
-                    throw new ValidationError({ message: 'Field negativeFeedback is required', statusCode: 422 });
+                    throw new ValidationError({
+                        message: "Field negativeFeedback is required",
+                        statusCode: 422,
+                    });
                 }
-                return [4 /*yield*/, feedback_1.default.create(data)];
-            case 2: return [2 /*return*/, _a.sent()];
+                return [2 /*return*/, feedback_1.default.create(data)];
         }
     });
 }); };
@@ -113,7 +133,7 @@ exports.getByUser = function (id) { return __awaiter(void 0, void 0, void 0, fun
     var feedback;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, feedback_1.default.find({ "id_user": id })];
+            case 0: return [4 /*yield*/, feedback_1.default.find({ id_user: id })];
             case 1:
                 feedback = _a.sent();
                 if (!feedback) {
@@ -130,12 +150,12 @@ exports.getByCourse = function (id) { return __awaiter(void 0, void 0, void 0, f
     var feedback;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, feedback_1.default.find({ "id_course": id })];
+            case 0: return [4 /*yield*/, feedback_1.default.find({ id_course: id })];
             case 1:
                 feedback = _a.sent();
                 if (!feedback) {
                     throw new NotFoundError({
-                        message: "\uD83E\uDD37 None Course Feedback " + id + " found",
+                        message: "\uD83E\uDD37 Any Course Feedback " + id + " found",
                         statusCode: 404,
                     });
                 }

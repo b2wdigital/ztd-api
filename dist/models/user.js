@@ -9,8 +9,8 @@ var userSchema = new mongoose_1.Schema({
     canFeedback: { type: Boolean, required: true },
     canEditCourse: { type: Boolean, required: false },
 }, {
-    versionKey: false
+    versionKey: false,
 });
-//title: 1: admin, 2:manager, 3: instructor, 4:student moongose-role
+// title: 1: admin, 2:manager, 3: instructor, 4:student moongose-role
 var userModel = mongoose_1.model("User", userSchema);
 exports.default = userModel;

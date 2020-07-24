@@ -1,43 +1,22 @@
 import userModel, { IUserDocument } from "../models/user";
-import { User } from "../types/user";
+import { User, UserGoogleInfo } from "../types/user";
 
 const NotFoundError = require("../errors/not-found-error");
 const ValidationError = require("../errors/validation-error");
 
-export const create = async (data: User): Promise<IUserDocument> => {
-  const { name, email, canEditCourse, canFeedback } = data;
-  if (!name || name === "") {
-    throw new ValidationError({
-      message: "Field name is required",
-      statusCode: 422,
-    });
-  }
+export const create = async (data: UserGoogleInfo): Promise<IUserDocument> => {
+  const { email, id, name, picture } = data;
+  const user = await userModel.find({ email });
+  const newUser: User = {
+    googleid: id,
+    name,
+    email,
+    profileUrl: picture,
+    canEditCourse: false,
+    canFeedback: true,
+  };
 
-  if (!email || email === "") {
-    /** adicionar classe de erro com status code */
-    throw new ValidationError({
-      message: "Field email is required",
-      statusCode: 422,
-    });
-  }
-
-  if (!canEditCourse) {
-    /** adicionar classe de erro com status code */
-    throw new ValidationError({
-      message: "Field canEditCourse is required",
-      statusCode: 422,
-    });
-  }
-
-  if (!canFeedback) {
-    /** adicionar classe de erro com status code */
-    throw new ValidationError({
-      message: "Field canFeedbak is required",
-      statusCode: 422,
-    });
-  }
-
-  return userModel.create(data);
+  return userModel.create(newUser);
 };
 
 export const getById = async (id: string): Promise<IUserDocument> => {

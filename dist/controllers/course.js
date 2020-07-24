@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -66,13 +66,12 @@ exports.createCourse = function (req, res) { return __awaiter(void 0, void 0, vo
                 return [4 /*yield*/, courseService.create(req.body)];
             case 1:
                 dbResponse = _a.sent();
-                res.status(200).send(dbResponse);
-                return [3 /*break*/, 3];
+                return [2 /*return*/, res.status(200).send(dbResponse)];
             case 2:
                 err_1 = _a.sent();
                 return [2 /*return*/, res.status(err_1.statusCode || 500).json({
                         error: "\uD83D\uDC7B " + err_1.name,
-                        message: "" + err_1.message
+                        message: "" + err_1.message,
                     })];
             case 3: return [2 /*return*/];
         }
@@ -88,13 +87,12 @@ exports.getCourseById = function (req, res) { return __awaiter(void 0, void 0, v
                 return [4 /*yield*/, courseService.getById(id)];
             case 1:
                 dbResponse = _a.sent();
-                res.status(200).send(dbResponse);
-                return [3 /*break*/, 3];
+                return [2 /*return*/, res.status(200).send(dbResponse)];
             case 2:
                 err_2 = _a.sent();
                 return [2 /*return*/, res.status(err_2.statusCode || 500).json({
                         error: "\uD83D\uDC7B " + err_2.name,
-                        message: "" + err_2.message
+                        message: "" + err_2.message,
                     })];
             case 3: return [2 /*return*/];
         }
@@ -108,12 +106,12 @@ exports.getAllCourses = function (req, res) { return __awaiter(void 0, void 0, v
             case 1:
                 dbResponse = _a.sent();
                 try {
-                    res.send(dbResponse);
+                    return [2 /*return*/, res.send(dbResponse)];
                 }
                 catch (err) {
                     return [2 /*return*/, res.status(err.statusCode || 500).json({
                             error: "\uD83D\uDC7B " + err.name,
-                            message: "" + err.message
+                            message: "" + err.message,
                         })];
                 }
                 return [2 /*return*/];
@@ -130,12 +128,12 @@ exports.updateCourse = function (req, res) { return __awaiter(void 0, void 0, vo
             case 1:
                 dbResponse = _a.sent();
                 try {
-                    res.send(dbResponse);
+                    return [2 /*return*/, res.send(dbResponse)];
                 }
                 catch (err) {
                     return [2 /*return*/, res.status(err.statusCode || 500).json({
                             error: "\uD83D\uDC7B " + err.name,
-                            message: "" + err.message
+                            message: "" + err.message,
                         })];
                 }
                 return [2 /*return*/];

@@ -9,5 +9,6 @@ const config = {
       : process.env.MONGO_DB_URL || "",
   CLIENT_ID: process.env.CLIENT_ID,
   CLIENT_SECRET: process.env.CLIENT_SECRET,
+  GOOGLE_URL: "https://oauth2.googleapis.com/token",
 };
 export default config;

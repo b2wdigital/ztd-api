@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -64,17 +64,15 @@ exports.createFeedback = function (req, res) { return __awaiter(void 0, void 0, 
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 data = req.body;
-                console.log('data', data);
                 return [4 /*yield*/, feedbackService.create(data)];
             case 1:
                 dbResponse = _a.sent();
-                res.send(dbResponse);
-                return [3 /*break*/, 3];
+                return [2 /*return*/, res.send(dbResponse)];
             case 2:
                 err_1 = _a.sent();
                 return [2 /*return*/, res.status(err_1.statusCode).json({
                         error: "\uD83D\uDC7B " + err_1.name,
-                        message: "" + err_1.message
+                        message: "" + err_1.message,
                     })];
             case 3: return [2 /*return*/];
         }
@@ -90,12 +88,12 @@ exports.getFeedbackById = function (req, res) { return __awaiter(void 0, void 0,
             case 1:
                 dbResponse = _a.sent();
                 try {
-                    res.send(dbResponse);
+                    return [2 /*return*/, res.send(dbResponse)];
                 }
                 catch (err) {
                     return [2 /*return*/, res.status(err.statusCode || 500).json({
                             error: "\uD83D\uDC7B " + err.name,
-                            message: "" + err.message
+                            message: "" + err.message,
                         })];
                 }
                 return [2 /*return*/];
@@ -110,12 +108,12 @@ exports.getAllFeedbacks = function (req, res) { return __awaiter(void 0, void 0,
             case 1:
                 dbResponse = _a.sent();
                 try {
-                    res.send(dbResponse);
+                    return [2 /*return*/, res.send(dbResponse)];
                 }
                 catch (err) {
                     return [2 /*return*/, res.status(err.statusCode || 500).json({
                             error: "\uD83D\uDC7B " + err.name,
-                            message: "" + err.message
+                            message: "" + err.message,
                         })];
                 }
                 return [2 /*return*/];
@@ -132,12 +130,12 @@ exports.getFeedbackByUser = function (req, res) { return __awaiter(void 0, void 
             case 1:
                 dbResponse = _a.sent();
                 try {
-                    res.send(dbResponse);
+                    return [2 /*return*/, res.send(dbResponse)];
                 }
                 catch (err) {
                     return [2 /*return*/, res.status(err.statusCode || 500).json({
                             error: "\uD83D\uDC7B " + err.name,
-                            message: "" + err.message
+                            message: "" + err.message,
                         })];
                 }
                 return [2 /*return*/];
@@ -154,12 +152,12 @@ exports.getFeedbackByCourse = function (req, res) { return __awaiter(void 0, voi
             case 1:
                 dbResponse = _a.sent();
                 try {
-                    res.send(dbResponse);
+                    return [2 /*return*/, res.send(dbResponse)];
                 }
                 catch (err) {
                     return [2 /*return*/, res.status(err.statusCode || 500).json({
                             error: "\uD83D\uDC7B " + err.name,
-                            message: "" + err.message
+                            message: "" + err.message,
                         })];
                 }
                 return [2 /*return*/];

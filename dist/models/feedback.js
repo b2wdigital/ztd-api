@@ -8,7 +8,7 @@ var feedbackSchema = new mongoose_1.Schema({
     positiveFeedback: { type: String, required: true },
     negativeFeedback: { type: String, required: true },
 }, {
-    versionKey: false
+    versionKey: false,
 });
 var feedbackModel = mongoose_1.model("Feedback", feedbackSchema);
 exports.default = feedbackModel;

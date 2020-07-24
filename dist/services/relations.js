@@ -56,14 +56,16 @@ exports.listGivenFeedbacks = function (idUser) { return __awaiter(void 0, void 0
             case 0: return [4 /*yield*/, course_1.default.find()];
             case 1:
                 courses = _a.sent();
-                return [4 /*yield*/, feedback_1.default.find({ "id_user": idUser })];
+                return [4 /*yield*/, feedback_1.default.find({ id_user: idUser })];
             case 2:
                 feedback = _a.sent();
                 given = [];
                 _loop_1 = function (course) {
                     return __generator(this, function (_a) {
                         switch (_a.label) {
-                            case 0: return [4 /*yield*/, feedback_1.default.find({ "id_course": course._id, "id_user": idUser }).then(function (response) {
+                            case 0: return [4 /*yield*/, feedback_1.default
+                                    .find({ id_course: course._id, id_user: idUser })
+                                    .then(function (response) {
                                     if (response.length > 0) {
                                         given.push(course);
                                     }
@@ -94,16 +96,16 @@ exports.listPendingFeedbacks = function (idUser) { return __awaiter(void 0, void
     var courses, pending, _loop_2, _i, courses_2, course;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, course_1.default.find()
-                // id da materia, id o feedback, pegar materias sem id feedback. JOIN, WHERE.
-            ];
+            case 0: return [4 /*yield*/, course_1.default.find()];
             case 1:
                 courses = _a.sent();
                 pending = [];
                 _loop_2 = function (course) {
                     return __generator(this, function (_a) {
                         switch (_a.label) {
-                            case 0: return [4 /*yield*/, feedback_1.default.find({ "id_course": course._id, "id_user": idUser }).then(function (response) {
+                            case 0: return [4 /*yield*/, feedback_1.default
+                                    .find({ id_course: course._id, id_user: idUser })
+                                    .then(function (response) {
                                     if (response.length == 0) {
                                         pending.push(course);
                                     }

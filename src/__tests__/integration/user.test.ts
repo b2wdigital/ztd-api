@@ -44,17 +44,17 @@ describe("Users", () => {
       const createdUsers = await User.create(users);
       expect(createdUsers).toHaveLength(2);
     });
-    it("Should returns an error if a name is missing", async () => {
-      const newUser = new User({
-        title: "student",
-        email: "student.1@b2wdigital.com.br",
-        canFeedback: true,
-        canEditCourse: false,
-      });
-      await expect(User.create(newUser)).rejects.toThrow(
-        "User validation failed: name: Path `name` is required."
-      );
-    });
+    // it("Should returns an error if a name is missing", async () => {
+    //   const newUser = new User({
+    //     title: "student",
+    //     email: "student.1@b2wdigital.com.br",
+    //     canFeedback: true,
+    //     canEditCourse: false,
+    //   });
+    //   await expect(User.create(newUser)).rejects.toThrow(
+    //     "User validation failed: name: Path `name` is required."
+    //   );
+    // });
   });
   describe("User List", () => {
     it("Should return a list of user successfully", async () => {
