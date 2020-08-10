@@ -1,17 +1,14 @@
 import courseModel, { ICourseDocument } from "../models/course";
 import { Course } from "../types/course";
 
-const NotFoundError = require("../errors/not-found-error");
-const ValidationError = require("../errors/validation-error");
+import NotFoundError from "../errors/not-found-error";
+import ValidationError from "../errors/validation-error";
 
 export const create = async (data: Course): Promise<ICourseDocument> => {
   const { name } = data;
 
   if (!data.name || name === "") {
-    throw new ValidationError({
-      message: "Field name is required",
-      statusCode: 422,
-    });
+    throw new ValidationError("Field name is required", 422);
   }
   return courseModel.create(data);
 };
@@ -19,10 +16,7 @@ export const create = async (data: Course): Promise<ICourseDocument> => {
 export const getById = async (id: string): Promise<ICourseDocument> => {
   const course = await courseModel.findById(id);
   if (!course) {
-    throw new NotFoundError({
-      message: `🤷 Feedback ${id} not found`,
-      statusCode: 404,
-    });
+    throw new NotFoundError(`🤷 Feedback ${id} not found`, 404);
   }
   return course;
 };
@@ -39,10 +33,7 @@ export const update = async (
   await courseModel.findByIdAndUpdate(id, body);
   const course = await courseModel.findById(id);
   if (!course) {
-    throw new NotFoundError({
-      message: `🤷 Course ${id} not found`,
-      statusCode: 404,
-    });
+    throw new NotFoundError(`🤷 Course ${id} not found`, 404);
   }
   return course;
 };

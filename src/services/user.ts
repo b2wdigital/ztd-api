@@ -1,31 +1,35 @@
+import { Profile } from "passport-google-oauth20";
 import userModel, { IUserDocument } from "../models/user";
 import { User, UserGoogleInfo } from "../types/user";
 
-const NotFoundError = require("../errors/not-found-error");
-const ValidationError = require("../errors/validation-error");
+import NotFoundError from "../errors/not-found-error";
+import ValidationError from "../errors/validation-error";
 
-export const create = async (data: UserGoogleInfo): Promise<IUserDocument> => {
-  const { email, id, name, picture } = data;
-  const user = await userModel.find({ email });
-  const newUser: User = {
-    googleid: id,
-    name,
-    email,
-    profileUrl: picture,
-    canEditCourse: false,
-    canFeedback: true,
-  };
+export const createOrReturnExistent = async (
+  data: Profile
+): Promise<IUserDocument> => {
+  const { _json } = data;
+  const { email, sub, name, picture } = _json;
 
-  return userModel.create(newUser);
+  const user = await userModel.findOne({ email });
+  if (!user) {
+    const newUser: User = {
+      googleid: sub,
+      name,
+      email,
+      profileUrl: picture,
+      canEditCourse: false,
+      canFeedback: true,
+    };
+    return userModel.create(newUser);
+  }
+  return user;
 };
 
 export const getById = async (id: string): Promise<IUserDocument> => {
   const user = await userModel.findById(id);
   if (!user) {
-    throw new NotFoundError({
-      message: `🤷 User ${id} not found`,
-      statusCode: 404,
-    });
+    throw new NotFoundError(`🤷 User ${id} not found`, 404);
   }
   return user;
 };
@@ -33,10 +37,7 @@ export const getById = async (id: string): Promise<IUserDocument> => {
 export const list = async (): Promise<IUserDocument[]> => {
   const user = await userModel.find();
   if (!user) {
-    throw new NotFoundError({
-      message: `🤷 Any User not found`,
-      statusCode: 404,
-    });
+    throw new NotFoundError(`🤷 Any User not found`, 404);
   }
   return user;
 };
