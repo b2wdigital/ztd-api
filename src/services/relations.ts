@@ -3,14 +3,6 @@ import { Feedback } from "../types/feedback";
 import courseModel from "../models/course";
 import { Course } from "../types/course";
 
-// async function existentFeedback(idUser: String, idCourse: String){
-//   await feedbackModel.find({"id_course": idCourse, "id_user": idUser}).then(test =>{
-//     if (test.length > 0){
-//       return console.log(test)
-//     }
-//   })
-// }
-
 export const listGivenFeedbacks = async (idUser: string) => {
   const courses = await courseModel.find();
   const feedback = await feedbackModel.find({ id_user: idUser });
