@@ -6,11 +6,10 @@ import { Course } from "../types/course";
 export const listGivenFeedbacks = async (idUser: string) => {
   const courses = await courseModel.find();
   const feedback = await feedbackModel.find({ id_user: idUser });
+
   // procurar mongo metodo que traz o curso a partir do id, query d mongo;
   const given: any = [];
-  // const filteredCourses = courses.filter((course) => {
-  //   existentFeedback(idUser, course._id)
-  // })
+  const filteredCourses = courses.filter((course) => {
   for (const course of courses) {
     await feedbackModel
       .find({ id_course: course._id, id_user: idUser })

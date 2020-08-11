@@ -7,6 +7,7 @@ export interface IUserDocument extends Document {
   email: string;
   canFeedback: boolean;
   canEditCourse: boolean;
+  isAdmin: boolean;
 }
 
 const userSchema = new Schema(
@@ -15,8 +16,9 @@ const userSchema = new Schema(
     name: { type: String, required: true },
     profileUrl: { type: String, default: "" },
     email: { type: String, default: "", required: true },
-    canFeedback: { type: Boolean, required: true },
-    canEditCourse: { type: Boolean, required: false },
+    canFeedback: { type: Boolean, default: true, required: false },
+    canEditCourse: { type: Boolean, default: false, required: false },
+    isAdmin: { type: Boolean, default: false, required: false },
   },
   {
     versionKey: false,

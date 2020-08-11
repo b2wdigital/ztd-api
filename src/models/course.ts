@@ -7,6 +7,7 @@ export interface ICourseDocument extends Document {
   extra: string;
   goals: string;
   topicsCovered: string;
+  module: { type: number };
 }
 
 const courseSchema = new Schema(
@@ -17,6 +18,7 @@ const courseSchema = new Schema(
     extra: { type: String, default: "" },
     goals: { type: String, default: "" },
     topicsCovered: { type: String, default: "" },
+    module: { type: Number, required: false },
   },
   {
     versionKey: false,

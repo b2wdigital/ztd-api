@@ -56,6 +56,7 @@ export const getFeedbackByUser = async (
   // const { jwt } = req.headers.authorization;
 
   const dbResponse = await feedbackService.getByUser(id);
+  console.log(dbResponse);
   try {
     return res.send(dbResponse);
   } catch (err) {
