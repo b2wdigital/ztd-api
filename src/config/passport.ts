@@ -31,6 +31,7 @@ passport.use(
       callbackURL: "/auth/google/callback",
       proxy: true,
     },
+
     async (accessToken, refreshToken, profile, done) => {
       const user = await createOrReturnExistent(profile);
       done("", user, accessToken);
