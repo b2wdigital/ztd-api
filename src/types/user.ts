@@ -1,3 +1,5 @@
+import { StringifyOptions } from "querystring";
+
 export type User = {
   googleid: string;
   name: string;
@@ -8,6 +10,7 @@ export type User = {
 };
 
 export type UserGoogleInfo = {
+  _id: string;
   id: string;
   email: string;
   name: string;

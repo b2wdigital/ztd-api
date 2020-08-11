@@ -33,16 +33,32 @@ export const getAllUsers = async (
   }
 };
 
-// export const getAllInstructors = async (req: Request, res: Response) => {
-//   const { id } = req.params;
-//   try {
-//     const dbResponse = await userModel.findById(id);
-//     console.log(dbResponse);
-//     res.status(200).send(dbResponse);
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// };
+export const getAllInstructors = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    // const dbResponse = await userService.findById(id);
+    // console.log(dbResponse);
+    // res.status(200).send(dbResponse);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+export const editUser = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { id } = req.params;
+  const dbResponse = await userService.getById(id);
+  try {
+    return res.send(dbResponse);
+  } catch (err) {
+    return res.status(err.statusCode || 500).json({
+      error: `👻 ${err.name}`,
+      message: `${err.message}`,
+    });
+  }
+};
 
 export const getGivenFeedbacks = async (
   req: Request,

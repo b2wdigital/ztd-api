@@ -34,6 +34,14 @@ export const getById = async (id: string): Promise<IUserDocument> => {
   return user;
 };
 
+export const getInstructors = async (id: string): Promise<IUserDocument[]> => {
+  const user = await userModel.find({ canEditCourse: true });
+  if (!user) {
+    throw new NotFoundError(`🤷 User ${id} not found`, 404);
+  }
+  return user;
+};
+
 export const list = async (): Promise<IUserDocument[]> => {
   const user = await userModel.find();
   if (!user) {

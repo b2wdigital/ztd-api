@@ -1,5 +1,4 @@
 import * as queryString from "query-string";
-import { env } from "process";
 
 require("dotenv");
 
