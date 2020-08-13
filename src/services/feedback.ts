@@ -22,33 +22,6 @@ export const create = async (data: Feedback): Promise<IFeedbackDocument> => {
     throw new ValidationError("Feedback already exists", 409);
   }
 
-  // if (!id_user || id_user === "") {
-  //   /** adicionar classe de erro com status code */
-  //   throw new ValidationError("Field id_user is required", 422);
-  // }
-
-  // if (!id_course || id_course === "") {
-  //   /** adicionar classe de erro com status code */
-  //   throw new ValidationError("Field id_course is required", 422);
-  // }
-
-  // if (!grade) {
-  //   /** adicionar classe de erro com status code */
-  //   throw new ValidationError("Field grade is required", 422);
-  // }
-
-  // if (!positiveFeedback || positiveFeedback === "") {
-  //   /** adicionar classe de erro com status code */
-  //   throw new ValidationError("Field positiveFeedback is required", 422);
-  // }
-
-  // if (!negativeFeedback || negativeFeedback === "") {
-  //   /** adicionar classe de erro com status code */
-  //   throw new ValidationError({
-  //     message: "Field negativeFeedback is required",
-  //     statusCode: 422,
-  //   });
-  // }
   return feedbackModel.create(data);
 };
 
@@ -74,10 +47,75 @@ export const getByUser = async (id: string): Promise<IFeedbackDocument[]> => {
   return feedback;
 };
 
-export const getByCourse = async (id: string): Promise<IFeedbackDocument[]> => {
-  const feedback = await feedbackModel.find({ id_course: id });
-  if (!feedback) {
-    throw new NotFoundError(`🤷 Any Course Feedback ${id} found`, 404);
-  }
+export const allFeedbacksByCourse = async (): Promise<IFeedbackDocument[]> => {
+  const feedback = await feedbackModel.aggregate([
+    {
+      $lookup: {
+        from: "courses",
+        let: {
+          resultObj: {
+            $toObjectId: "$id_course",
+          },
+        },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $eq: ["$_id", "$$resultObj"],
+              },
+            },
+          },
+        ],
+        as: "curso",
+      },
+    },
+    {
+      $group: {
+        _id: "$curso",
+        grades: {
+          $push: "$grade",
+        },
+        positiveFeedbacks: {
+          $push: "$positiveFeedback",
+        },
+        negativeFeedbacks: {
+          $push: "$negativeFeedback",
+        },
+      },
+    },
+  ]);
+  return feedback;
+};
+
+export const allFeedbacksByUser = async (): Promise<IFeedbackDocument[]> => {
+  const feedback = await feedbackModel.aggregate([
+    {
+      $addFields: {
+        id_course: {
+          $toObjectId: "$id_course",
+        },
+        id_user: {
+          $toObjectId: "$id_user",
+        },
+      },
+    },
+    {
+      $group: {
+        _id: "$id_user",
+        courses: {
+          $push: "$id_course",
+        },
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $lookup: {
+        from: "courses",
+        localField: "courses",
+        foreignField: "_id",
+        as: "courses",
+      },
+    },
+  ]);
   return feedback;
 };

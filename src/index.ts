@@ -12,5 +12,4 @@ export const mid = setMiddlewares(app);
 
 app.listen(config.PORT, () => {
   console.log(`✨ server started on port ${config.PORT}!`);
-  console.log(process.env.NODE_ENV);
 });

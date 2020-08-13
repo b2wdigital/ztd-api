@@ -71,8 +71,22 @@ export const getFeedbackByCourse = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const { id } = req.params;
-  const dbResponse = await feedbackService.getByCourse(id);
+  const dbResponse = await feedbackService.allFeedbacksByCourse();
+  try {
+    return res.send(dbResponse);
+  } catch (err) {
+    return res.status(err.statusCode || 500).json({
+      error: `👻 ${err.name}`,
+      message: `${err.message}`,
+    });
+  }
+};
+
+export const getAllFeedbackByUser = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const dbResponse = await feedbackService.allFeedbacksByUser();
   try {
     return res.send(dbResponse);
   } catch (err) {
