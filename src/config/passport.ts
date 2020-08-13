@@ -7,7 +7,6 @@ import config from "./index";
 import { UserGoogleInfo } from "../types/user";
 
 passport.serializeUser((user: UserGoogleInfo, done) => {
-  console.log("serializeUser -> ", user);
   done(null, user._id);
 });
 
@@ -20,7 +19,6 @@ passport.deserializeUser((id, done) => {
     .catch((e) => {
       done(new Error("Failed to deserialize an user"));
     });
-  console.log("deserializeUser -> ", a);
 });
 
 passport.use(
@@ -31,6 +29,7 @@ passport.use(
       callbackURL: "/auth/google/callback",
       proxy: true,
     },
+
     async (accessToken, refreshToken, profile, done) => {
       const user = await createOrReturnExistent(profile);
       done("", user, accessToken);
