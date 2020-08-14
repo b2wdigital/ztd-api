@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as feedbackService from "../services/feedback";
+import * as relationsService from "../services/relations";
 
 export const createFeedback = async (
   req: Request,
@@ -67,11 +68,27 @@ export const getFeedbackByUser = async (
   }
 };
 
-export const getFeedbackByCourse = async (
+export const getAllFeedbackByCourse = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
   const dbResponse = await feedbackService.allFeedbacksByCourse();
+  try {
+    return res.send(dbResponse);
+  } catch (err) {
+    return res.status(err.statusCode || 500).json({
+      error: `👻 ${err.name}`,
+      message: `${err.message}`,
+    });
+  }
+};
+
+export const getFeedbackByCourse = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { id, idUser } = req.params;
+  const dbResponse = await relationsService.getFeedbackByCourse(id, idUser);
   try {
     return res.send(dbResponse);
   } catch (err) {
