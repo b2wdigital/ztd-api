@@ -105,7 +105,9 @@ export const allFeedbacksByUser = async (): Promise<IFeedbackDocument[]> => {
         courses: {
           $push: "$id_course",
         },
-        count: { $sum: 1 },
+        count: {
+          $sum: 1,
+        },
       },
     },
     {
@@ -114,6 +116,14 @@ export const allFeedbacksByUser = async (): Promise<IFeedbackDocument[]> => {
         localField: "courses",
         foreignField: "_id",
         as: "courses",
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "_id",
+        foreignField: "_id",
+        as: "_id",
       },
     },
   ]);
