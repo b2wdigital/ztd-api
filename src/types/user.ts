@@ -7,6 +7,7 @@ export type User = {
   email: string;
   canFeedback: boolean;
   canEditCourse: boolean;
+  isAdmin: boolean;
 };
 
 export type UserGoogleInfo = {

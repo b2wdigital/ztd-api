@@ -37,7 +37,6 @@ export const getAllInstructors = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const dbResponse = await userService.getInstructors(id);
-    console.log(dbResponse);
     res.status(200).send(dbResponse);
   } catch (error) {
     res.status(500).send(error);

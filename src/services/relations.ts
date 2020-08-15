@@ -40,3 +40,11 @@ export const listPendingFeedbacks = async (idUser: string) => {
   }
   return pending;
 };
+
+export const getFeedbackByCourse = async (idCourse: string, idUser: string) => {
+  const feedback = await feedbackModel.find({
+    id_course: idCourse,
+    id_user: idUser,
+  });
+  return feedback;
+};
