@@ -25,13 +25,37 @@ const initLibs = (app: Express) => {
   app.use(passport.session());
   app.use(
     cors({
-      origin: config.HOMEPAGE,
-      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+      origin: "https://zerotodev.api.pe.hmg.asgard.b2w.io",
+      methods: ["GET,HEAD,PUT,PATCH,POST,DELETE"],
+      allowedHeaders: [
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+        "Access-Control-Allow-Origin",
+        "Access-Control-Allow-Credentials",
+      ],
       credentials: true,
     })
   );
+  app.use(function (req, res, next) {
+    res.header(
+      "Access-Control-Allow-Origin",
+      "https://zerotodev.api.pe.hmg.asgard.b2w.io"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Origin",
+      "https://zerotodev.api.pe.hmg.asgard.b2w.io"
+    );
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    next();
+  });
 };
-
 const initRoutes = (app: Express) => {
   app.use("/courses", courseRoutes);
   app.use("/feedbacks", feedbackRoutes);

@@ -9,6 +9,6 @@ export const loginSuccess = async (req: Request, res: Response) => {
 };
 
 export const logout = async (req: Request, res: Response) => {
-  req.logout();
-  res.redirect("https://zerotodev.api.pe.hmg.asgard.b2w.io/");
+  req.logOut();
+  res.redirect("https://zerotodev.api.pe.hmg.asgard.b2w.io");
 };
