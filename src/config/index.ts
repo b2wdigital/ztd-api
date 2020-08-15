@@ -10,6 +10,6 @@ const config = {
   CLIENT_ID: process.env.GOOGLE_CLIENT_ID as string,
   CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET as string,
   GOOGLE_URL: "https://oauth2.googleapis.com/token",
-  HOMEPAGE: "http://localhost:3000",
+  HOMEPAGE: "https://zerotodev.api.pe.hmg.asgard.b2w.io/",
 };
 export default config;
