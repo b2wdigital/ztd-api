@@ -5,4 +5,5 @@ export type Course = {
   extra: string;
   goals: string;
   topicsCovered: string;
+  module: number;
 };

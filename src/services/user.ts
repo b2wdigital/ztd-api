@@ -20,6 +20,7 @@ export const createOrReturnExistent = async (
       profileUrl: picture,
       canEditCourse: false,
       canFeedback: true,
+      isAdmin: false,
     };
     return userModel.create(newUser);
   }
