@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="Zero to Dev (API)" title="#ZeroToDev" src="./public/logo_git.png" />
+    <img alt="Zero to Dev (API)" title="#ZeroToDev" src="./images/logo_git.png" />
 </h1>
 
 <h1 align="center">
